@@ -19,20 +19,20 @@ namespace Assignment1.Services
             _filepath = filepath;
         }
 
-        public void Save(List<Product> list)
+        public void Save(List<Contact> list)
         {
-            using var sw = new StreamWriter(_FilePath);
+            using var sw = new StreamWriter(_filepath);
             sw.WriteLine(JsonConvert.SerializeObject(list));
         }
 
-        public List<Product> Read()
+        public List<Contact> Read()
         {
-            var list =new List<Product>();
+            var list =new List<Contact>();
 
             try
             {
-                using var sr = new StreamReader(_FilePath);
-                list = JsonConvert.DeserializeObject<List<Product>>(sr.ReadToEnd());
+                using var sr = new StreamReader(_filepath);
+                list = JsonConvert.DeserializeObject<List<Contact>>(sr.ReadToEnd());
             }
             catch { }
 

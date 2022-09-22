@@ -16,11 +16,11 @@ namespace Assignment1.Services
     }
     internal class MenuService : IMenu
     {
-        private ProductService _productService;
+        private ContactService _productService;
 
         public MenuService(string filepath)
         {
-            _productService = new ProductService(filepath);
+            _productService = new ContactService(filepath);
         }
         public void Create()
         {
@@ -45,6 +45,17 @@ namespace Assignment1.Services
         public void Remove()
         {
             throw new NotImplementedException();
+        }
+
+
+        public static void MainMenu()
+        {
+            Console.Clear();
+            Console.WriteLine();
+            Console.WriteLine("1. Add contact");
+            Console.WriteLine("2. Remove contact");
+            Console.WriteLine("3. View contact");
+
         }
     }
 }

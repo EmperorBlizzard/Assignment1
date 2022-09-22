@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace Assignment1.Model
 {
-    internal class Product
+    internal class Contact
     {
-        public Product()
+        public Contact()
         {
             Id = Guid.NewGuid();
         }
 
-        public Product(Guid id, string name, string description, decimal price)
+        public Contact(Guid id, string name, string description, decimal price)
         {
             Id = id;
             Name = name;
