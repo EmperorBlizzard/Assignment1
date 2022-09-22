@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace Assignment1.Services
 {
-    internal class MenuService
+    internal interface IMenu
+    {
+
+    }
+    internal class MenuService : IMenu
     {
 
     }
