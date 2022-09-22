@@ -12,11 +12,11 @@ namespace Assignment1.Services
 {
     internal class FileService
     {
-        private string _FilePath;
+        private string _filepath;
 
-        public FileService(string FilePath)
+        public FileService(string filepath)
         {
-            _FilePath = FilePath;
+            _filepath = filepath;
         }
 
         public void Save(List<Product> list)
