@@ -9,51 +9,70 @@ namespace Assignment1.Services
 {
     internal interface IMenu
     {
-        public static void MainMenu();
-        public void Create();
-        public void List();
-        public void Details();
-        public void Remove();
-        public void Init();
+        public void MainMenu();
+        public void ViewListMenu();
+        public Contact CreateMenu();
+        public void RemoveMenu();
+        public void SettingsMenu();      
     }
     internal class MenuService : IMenu
     {
-        private ContactService _productService;
+        private ContactService _contactService;
 
         public MenuService(string filepath)
         {
-            _productService = new ContactService(filepath);
+            _contactService = new ContactService(filepath);
         }
-        public void Create()
+        
+        public void ViewListMenu()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Contact CreateMenu()
         {
             var contact = new Contact();
-            Console.Clear();
-            Console.WriteLine("Create new contact");
-            Console.Write("");
+            
+            try
+            {
+                Console.Clear();
+                Console.WriteLine("########## Create new contact ##########");
+                
+                Console.Write("");
+                
+                Console.Write("");
+                
+                Console.Write("");
+                
+                Console.Write("");
+                
+                Console.Write("");
+
+
+                return contact;
+            }
+            catch
+            {
+                Console.WriteLine("Invalid values added.");
+                Console.ReadKey();
+            }
+            return null!;
         }
 
-        public void Details()
+        public void RemoveMenu()
         {
             throw new NotImplementedException();
         }
 
-        public void Init()
-        {
-            throw new NotImplementedException();
-        }
 
-        public void List()
-        {
-            throw new NotImplementedException();
-        }
 
-        public void Remove()
+        public void SettingsMenu()
         {
-            throw new NotImplementedException();
+            
         }
 
 
-        public static void MainMenu()
+        public void MainMenu()
         {
             Console.Clear();
             Console.WriteLine();
@@ -72,7 +91,7 @@ namespace Assignment1.Services
                 case "1":
                     
                 case "2":
-
+                    
                 case "3":
 
                 case "4":

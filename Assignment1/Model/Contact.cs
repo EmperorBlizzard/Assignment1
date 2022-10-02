@@ -8,22 +8,10 @@ namespace Assignment1.Model
 {
     internal class Contact
     {
-        public Contact()
-        {
-            Id = Guid.NewGuid();
-        }
-
-        public Contact(Guid id, string name, string description, decimal price)
-        {
-            Id = id;
-            Name = name;
-            Description = description;
-            Price = price;
-        }
-
-        public Guid Id { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public decimal Price { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Address { get; set; }
+        public string Phone { get; set; }
+        public string Email { get; set; }
     }
 }

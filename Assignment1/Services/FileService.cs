@@ -21,8 +21,17 @@ namespace Assignment1.Services
 
         public void Save(List<Contact> list)
         {
-            using var sw = new StreamWriter(_filepath);
-            sw.WriteLine(JsonConvert.SerializeObject(list));
+            try
+            {
+                using var sw = new StreamWriter(_filepath);
+                sw.WriteLine(JsonConvert.SerializeObject(list));
+            }
+            catch 
+            {
+                Console.Clear();
+                Console.WriteLine("Unable to save the address book");
+                Console.ReadKey();
+            }
         }
 
         public List<Contact> Read()
