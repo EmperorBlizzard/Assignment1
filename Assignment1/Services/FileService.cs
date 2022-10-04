@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Linq;
 using System.Text;
 using System.Text.Json.Nodes;
@@ -10,21 +11,26 @@ using System.Threading.Tasks;
 
 namespace Assignment1.Services
 {
-    internal class FileService
+    interface IFileService
     {
-        private string _filepath;
+        public void Save(string filePath, string text);
+        public string Read(string filepath);
+    }
+    internal class FileService : IFileService
+    {
+        
 
-        public FileService(string filepath)
+        public FileService()
         {
-            _filepath = filepath;
+            
         }
 
-        public void Save(List<Contact> list)
+        public void Save(string filePath, string text)
         {
             try
             {
-                using var sw = new StreamWriter(_filepath);
-                sw.WriteLine(JsonConvert.SerializeObject(list));
+                using var sw = new StreamWriter(filePath);
+                sw.WriteLine(text);
             }
             catch 
             {
@@ -34,18 +40,16 @@ namespace Assignment1.Services
             }
         }
 
-        public List<Contact> Read()
+        public string Read(string filePath)
         {
-            var list =new List<Contact>();
-
             try
             {
-                using var sr = new StreamReader(_filepath);
-                list = JsonConvert.DeserializeObject<List<Contact>>(sr.ReadToEnd());
+                using var sr = new StreamReader(filePath);
+                return sr.ReadToEnd();
             }
             catch { }
 
-            return list;
+            return "[]";
         }
     }
 }
