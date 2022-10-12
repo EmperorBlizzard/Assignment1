@@ -17,7 +17,9 @@ namespace Assignment1.Services
         private IFileService _fileService = new FileService();
         private List<Contact> _contacts = new();
         private string _filePath = @"C:\Users\emil1\Skrivbord\Address_book.json";
-
+        
+        
+        // Visar huvudmenyn
         public void MainMenu()
         {
             Console.Clear();
@@ -56,7 +58,8 @@ namespace Assignment1.Services
 
             }
         }
-
+        //visar id och namn på alla kontakter i adressboken
+        //kan välja om man vill se mer om en specifik kontakt    
         public void ViewListMenu()
         {
             try { _contacts = JsonConvert.DeserializeObject<List<Contact>>(_fileService.Read(_filePath)); }
@@ -85,18 +88,19 @@ namespace Assignment1.Services
                 }
             }
         }
-
+        //visar detaljerad information om en av kontakterna i adressboken
+        //kan välja att ändra kontakt eller ta bort kontakt
         public void ShowContactDetails(string id)
         {
             var contact = _contacts.FirstOrDefault(x => x.Id == new Guid(id));
 
             Console.Clear();
             Console.WriteLine("########## Contact detail ##########");
-            Console.WriteLine($"Id \t\t                 {contact?.Id}");
-            Console.WriteLine($"Name \t\t               {contact?.FullName}");
-            Console.WriteLine($"Street address \t\t     {contact?.StreetAddress}");
-            Console.WriteLine($"Postal code \t\t        {contact?.PostalCode}");
-            Console.WriteLine($"City \t\t               {contact?.City}");
+            Console.WriteLine($"Id \t\t\t   {contact?.Id}");
+            Console.WriteLine($"Name \t\t\t   {contact?.FullName}");
+            Console.WriteLine($"Street address \t\t   {contact?.StreetAddress}");
+            Console.WriteLine($"Postal code \t\t   {contact?.PostalCode}");
+            Console.WriteLine($"City \t\t\t   {contact?.City}");
             Console.WriteLine();
             Console.WriteLine("1. Edit");
             Console.WriteLine("2. Delete");
@@ -106,7 +110,7 @@ namespace Assignment1.Services
             switch (option)
             {
                 case "1":
-                    ShowContactUppdate(contact);
+                    ShowContactUppdate(contact.Id, contact);
                     break;
                 case "2":
                     RemoveContact(contact.Id);
@@ -115,7 +119,7 @@ namespace Assignment1.Services
                     break;
             }
         }
-
+        //Skapar en ny kontakt
         public void ShowCreateContact()
         {
             var contact = new Contact();
@@ -143,13 +147,67 @@ namespace Assignment1.Services
             _fileService.Save(_filePath, JsonConvert.SerializeObject(_contacts));
                 
         }
+        //ändra en kontackts info
 
-        public void ShowContactUppdate(Contact contact)
+        public void ShowContactUppdate(Guid id, Contact contact)
         {
-            var index = 1;
+            var index = _contacts.FindIndex(x => x.Id == id);
+            Console.Clear();
+            Console.WriteLine("########## Edit CONTACT ##########");
+            Console.WriteLine();
+            Console.WriteLine("Will take the original value if left empty");
+            Console.WriteLine();
+            Console.Write("Edit first name: ");
+            var FirstName = Console.ReadLine() ?? "";
+
+            if(FirstName == "")
+            {
+                contact.FirstName = _contacts[index].FirstName;
+            }
+            else contact.FirstName = FirstName;
+
+            Console.Write("Edit last name: ");
+            var LastName = Console.ReadLine() ?? "";
+
+            if(LastName == "")
+            {
+                contact.LastName = _contacts[index].LastName;
+            }
+            else contact.LastName = LastName;
+
+            Console.Write("Edit street address: ");
+            var StreetAddress = Console.ReadLine() ?? "";
+
+            if (StreetAddress == "") 
+            {
+                contact.StreetAddress = _contacts[index].StreetAddress;
+            }
+            else contact.StreetAddress = StreetAddress;
+            
+
+            Console.Write("Edit postal code: ");
+            var PostalCode = Console.ReadLine() ?? "";
+
+            if(PostalCode == "")
+            {
+                contact.PostalCode = _contacts[index].PostalCode;
+            }
+            else contact.PostalCode = PostalCode;
+
+            Console.Write("Edit City: ");            
+            var City = Console.ReadLine() ?? "";
+            if (City == "")
+            {
+                contact.City = _contacts[index].City;
+            }
+            else contact.City = City;
+
+
             _contacts[index] = contact;
             _fileService.Save(_filePath, JsonConvert.SerializeObject(_contacts));
         }
+
+        //tar bort en kontakt från adressboken
         private void RemoveContact(Guid id)
         {
             _contacts = _contacts.Where(x => x.Id != id).ToList();
@@ -157,7 +215,7 @@ namespace Assignment1.Services
         }
 
 
-
+        //ändra sökvägen för .json filen
         public void ShowSettings()
         {
             try { _contacts = JsonConvert.DeserializeObject<List<Contact>>(_fileService.Read(_filePath)); }
