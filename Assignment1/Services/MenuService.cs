@@ -214,7 +214,8 @@ namespace Assignment1.Services
         //ändra sökvägen för .json filen
         public void ShowSettings()
         {
-            _contacts = JsonConvert.DeserializeObject<List<Contact>>(_fileService.Read(_filePath)); 
+            try { _contacts = JsonConvert.DeserializeObject<List<Contact>>(_fileService.Read(_filePath)); }
+            catch { }
 
             Console.Clear();
             Console.WriteLine("########## SETTINGS ##########");
