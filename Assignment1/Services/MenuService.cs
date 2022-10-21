@@ -98,6 +98,7 @@ namespace Assignment1.Services
             Console.WriteLine("########## Contact detail ##########");
             Console.WriteLine($"Id \t\t\t   {contact?.Id}");
             Console.WriteLine($"Name \t\t\t   {contact?.FullName}");
+            Console.WriteLine($"Émail \t\t\t   {contact?.Email}");
             Console.WriteLine($"Street address \t\t   {contact?.StreetAddress}");
             Console.WriteLine($"Postal code \t\t   {contact?.PostalCode}");
             Console.WriteLine($"City \t\t\t   {contact?.City}");
@@ -133,6 +134,9 @@ namespace Assignment1.Services
 
             Console.Write("Last name: ");
             contact.LastName = Console.ReadLine() ?? "";
+
+            Console.Write("Email: ");
+            contact.Email = Console.ReadLine() ?? "";
 
             Console.Write("Street Address: ");
             contact.StreetAddress = Console.ReadLine() ?? "";
@@ -174,6 +178,14 @@ namespace Assignment1.Services
             }
             else contact.LastName = LastName;
 
+            Console.Write("Edit Email: ");
+            var Email = Console.ReadLine() ?? "";
+            if (Email == "")
+            {
+                contact.City = _contacts[index].City;
+            }
+            else contact.Email = Email;
+
             Console.Write("Edit street address: ");
             var StreetAddress = Console.ReadLine() ?? "";
             if (StreetAddress == "") 
@@ -181,7 +193,6 @@ namespace Assignment1.Services
                 contact.StreetAddress = _contacts[index].StreetAddress;
             }
             else contact.StreetAddress = StreetAddress;
-            
 
             Console.Write("Edit postal code: ");
             var PostalCode = Console.ReadLine() ?? "";
