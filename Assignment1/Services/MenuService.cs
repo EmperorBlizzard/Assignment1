@@ -155,11 +155,11 @@ namespace Assignment1.Services
             Console.Clear();
             Console.WriteLine("########## Edit CONTACT ##########");
             Console.WriteLine();
-            Console.WriteLine("Will take the original value if left empty");
+            Console.WriteLine("Will use the previous value if left empty");
             Console.WriteLine();
+
             Console.Write("Edit first name: ");
             var FirstName = Console.ReadLine() ?? "";
-
             if(FirstName == "")
             {
                 contact.FirstName = _contacts[index].FirstName;
@@ -168,7 +168,6 @@ namespace Assignment1.Services
 
             Console.Write("Edit last name: ");
             var LastName = Console.ReadLine() ?? "";
-
             if(LastName == "")
             {
                 contact.LastName = _contacts[index].LastName;
@@ -177,7 +176,6 @@ namespace Assignment1.Services
 
             Console.Write("Edit street address: ");
             var StreetAddress = Console.ReadLine() ?? "";
-
             if (StreetAddress == "") 
             {
                 contact.StreetAddress = _contacts[index].StreetAddress;
@@ -187,7 +185,6 @@ namespace Assignment1.Services
 
             Console.Write("Edit postal code: ");
             var PostalCode = Console.ReadLine() ?? "";
-
             if(PostalCode == "")
             {
                 contact.PostalCode = _contacts[index].PostalCode;
@@ -201,7 +198,6 @@ namespace Assignment1.Services
                 contact.City = _contacts[index].City;
             }
             else contact.City = City;
-
 
             _contacts[index] = contact;
             _fileService.Save(_filePath, JsonConvert.SerializeObject(_contacts));
@@ -218,8 +214,8 @@ namespace Assignment1.Services
         //ändra sökvägen för .json filen
         public void ShowSettings()
         {
-            try { _contacts = JsonConvert.DeserializeObject<List<Contact>>(_fileService.Read(_filePath)); }
-            catch { }
+            _contacts = JsonConvert.DeserializeObject<List<Contact>>(_fileService.Read(_filePath)); 
+
             Console.Clear();
             Console.WriteLine("########## SETTINGS ##########");
             Console.Write("Enter the new file path: ");
