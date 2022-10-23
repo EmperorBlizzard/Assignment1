@@ -24,7 +24,7 @@ namespace Assignment1.Services
         {
             
         }
-
+        //Sparar till .json fil
         public void Save(string filePath, string text)
         {
             try
@@ -39,7 +39,7 @@ namespace Assignment1.Services
                 Console.ReadKey();
             }
         }
-
+        //Läser innehållet av .json fil
         public string Read(string filePath)
         {
             try
